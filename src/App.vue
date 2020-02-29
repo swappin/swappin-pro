@@ -122,7 +122,6 @@
           if(window.uid){
             window.email = user.email
             this.$router.push({ path: '/pedidos'});
-            alert("E-mail do usuário: ", user.uid);
           } else {
             this.$router.push({ path: '/login'})
           }

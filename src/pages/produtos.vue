@@ -119,16 +119,6 @@
                 </div>
 
               </div>
-              <div class="row">
-                <div class="col-md-12">
-                  <div class="copyright">
-                    <p>Copyright © 2019 Swappin. Todos os direitos reservados.</p>
-                  </div>
-
-
-
-                </div>
-              </div>
             </div>
           </div>
           <b-modal id="modal-1" title="Adicionar Produtos" ref="my-modal">
@@ -429,10 +419,12 @@
   font-size: 12px;
   color: #BBB;
 }
-.photo-upload-section{
-  height: 100px;
-}
 .v-switch-core{
   background: linear-gradient(90deg, #00BFB2, #05A9C7) !important;
+}
+
+.photo-upload-section{
+  height: 100px !important;
+  width: 100% !important;
 }
 </style>

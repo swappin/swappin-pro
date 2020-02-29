@@ -73,7 +73,7 @@
                   </div>
                 </div>
                 <div class="card" style="background:white; border-left:5px solid #00aa8b; padding:10px; min-height: 350px;">
-                  <apexchart width="500" type="line" :options="optionsYear" :series="seriesYear"></apexchart>
+                  <apexchart width="500" type="area" :options="optionsYear" :series="seriesYear"></apexchart>
                 </div>
               </div>
 
@@ -123,7 +123,7 @@ export default {
       optionsYear: {
         chart: {
           id: 'chart-year',
-          width: '100%'
+          width: '100%',
         },
         xaxis: {
           categories: [
@@ -140,7 +140,19 @@ export default {
             'Novembro',
             'Dezembro',
           ]
-        }
+        },
+        fill: {
+
+            type: "gradient",
+            gradient: {
+              type: "vertical",gradientToColors: [ '#00BFB2'],
+              shadeIntensity: 1,
+              opacityFrom: 1,
+              opacityTo: 0.5,
+              stops: [0, 90, 100],
+            },
+  colors: ['#05A9C7'],
+},
       },
       seriesYear: [{
         name: 'Vendas',
@@ -159,12 +171,23 @@ export default {
           391, //Dezembro
         ]
       }],
-
       optionsWeek: {
         chart: {
           id: 'chart-week',
           width: '100%'
         },
+        fill: {
+
+            type: "gradient",
+            gradient: {
+              type: "vertical",gradientToColors: [ '#00BFB2'],
+              shadeIntensity: 1,
+              opacityFrom: 1,
+              opacityTo: 1,
+              stops: [0, 90, 100],
+            },
+  colors: ['#05A9C7'],
+},
         xaxis: {
           categories: [
             'Domingo',
@@ -190,7 +213,12 @@ export default {
         ]
       }],
       optionsProducts: {
-        labels: ['Alok Classics.Tech Preto', 'Chilli Glasses Pop One', 'Chilli Hot Girl ', 'Chilli Colab Juliet', 'Nigga Glasses from Chilli',]
+        labels: ['Alok Classics.Tech Preto', 'Chilli Glasses Pop One', 'Chilli Hot Girl ', 'Chilli Colab Juliet', 'Nigga Glasses from Chilli',],
+
+
+          fill: {
+            type: "gradient",
+          },
       },
       seriesProducts: [
         44, //Product
