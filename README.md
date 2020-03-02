@@ -1,4 +1,4 @@
-# swappin-professional
+# swappin-pro
 
 > Swappin para Profissionais
 
