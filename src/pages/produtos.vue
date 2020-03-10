@@ -28,17 +28,17 @@
             </div>
             <div class="row">
 
-                <div class="col-lg-12">
+              <div class="col-lg-12">
 
 
-                </div>
+              </div>
               <div class="col-lg-12">
                 <table class="products-table table">
                   <thead>
                     <th colspan="2">
-                        <h4 class="title-2 mr-2" style="color: #A5A5A5; margin: 35px 0px !important;">Lista de Produtos</h4>
+                      <h4 class="title-2 mr-2" style="color: #A5A5A5; margin: 35px 0px !important;">Lista de Produtos</h4>
                     </th>
-                        <th colspan="7">
+                    <th colspan="7">
                       <form class="form-group d-flex flex-row justify-content-end" action="" method="POST" style="float: right; max-width: 450px; margin: 20px; margin-left: 0">
                         <input class="au-input au-input--xl" v-model="search" type="text"  name="search" placeholder="Pesquisar produtos..." style="padding-left: 20px !important;"/>
                         <button type="submit" style="position: absolute; display: contents">
@@ -70,10 +70,10 @@
                       <td><img class="card-img-top" :src="produto.photo" alt="Imagem do Produto" style="width:30px">
                       </td>
                       <td>
-                      <b-button id="show-btn" @click="$bvModal.show(produto, index)">
-                        <img src="../assets/icons/edit.png" class="icon">
-                      </b-button>
-                      <b-modal :id="produto" hide-footer >
+                        <b-button id="show-btn" @click="$bvModal.show(produto, index)">
+                          <img src="../assets/icons/edit.png" class="icon">
+                        </b-button>
+                        <b-modal :id="produto" hide-footer >
                           <template v-slot:modal-title>
                             <h3> Editar Produto </h3><br>
                             <form @submit="editProduto">
@@ -105,9 +105,9 @@
                         <td>
                           <button type="button" class="btn" style="width:100%" @click.stop="deleteProduto(produto)">
 
-                          <img src="../assets/icons/delete.png" class="icon">
-                        </button>
-                      </td>
+                            <img src="../assets/icons/delete.png" class="icon">
+                          </button>
+                        </td>
                         <td scope="col"><toggle-button v-model="produto.enable" @change="enable_(produto)"/>
 
 
@@ -126,33 +126,33 @@
               <div class="form-group d-flex flex-column" style="text-align:left">
                 <div class=" mb-4 photo-upload-section d-flex flex-row">
                   <div><input type="file" @change="compressImage" :disabled="loading" class="custom-file-input mb-4" id="exampleInputFile" aria-describedby="fileHelp">
-                  <label class="custom-file-label" for="exampleInputFile">
-                    <img src="../assets/icons/camera_1.png" class="icon" style="margin-left: 0px !important">
-                    <template v-if="loading">
-                      <i class="fa fa-spinner fa-spin"></i>
-                    </template>
-                    <template v-else></template>
-                    <template v-if="photo">
-                      <img class="product-photo" :src="photo" alt="Meu Produto" style="margin-left: 0px !important"><br><br>
-                    </template>
-                  </label>
-                </div>
+                    <label class="custom-file-label" for="exampleInputFile">
+                      <img src="../assets/icons/camera_1.png" class="icon" style="margin-left: 0px !important">
+                      <template v-if="loading">
+                        <i class="fa fa-spinner fa-spin"></i>
+                      </template>
+                      <template v-else></template>
+                      <template v-if="photo">
+                        <img class="product-photo" :src="photo" alt="Meu Produto" style="margin-left: 0px !important"><br><br>
+                      </template>
+                    </label>
+                  </div>
                   <div class="d-flex flex-column justify-content-center ml-2">
-                      <p class="mb-0">Insira uma foto em boa resolução</p>
-                      <h4 class="title-2 swappin-color mb-0 mt-1">Capriche na imagem do seu produto</h4>
+                    <p class="mb-0">Insira uma foto em boa resolução</p>
+                    <h4 class="title-2 swappin-color mb-0 mt-1">Capriche na imagem do seu produto</h4>
                   </div>
 
                 </div>
 
                 <label style=" margin-left:25px;"> Nome do Produto</label>
-                  <input v-model="name" class="form-control mb-2"  type="text" placeholder="Digite o nome do produto" style="padding-left: 20px !important;"/>
+                <input v-model="name" class="form-control mb-2"  type="text" placeholder="Digite o nome do produto" style="padding-left: 20px !important;"/>
 
                 <label style=" margin-left:25px;">Código do Produto</label>
-                  <input v-model="code" class="form-control mb-2" type="text" placeholder="Digite o código do produto" style="padding-left: 20px !important;"/>
+                <input v-model="code" class="form-control mb-2" type="text" placeholder="Digite o código do produto" style="padding-left: 20px !important;"/>
 
                 <label style=" margin-left:25px;"> Preço do Produto
                 </label>
-                  <input v-model.number="price" step="0.01" class="form-control mb-2" type="number" placeholder="0" style="padding-left: 20px !important;"/>
+                <input v-model.number="price" step="0.01" class="form-control mb-2" type="number" placeholder="0" style="padding-left: 20px !important;"/>
 
                 <label style=" margin-left:25px;"> Preço Promocional <i>(opcional)</i>
                 </label>
@@ -169,7 +169,7 @@
 
 
               <div class="d-flex flex-row">
-              <b-button class="btn-cancel" variant="outline-danger" block @click="hideModal" style="width:50%;">Cancelar</b-button>
+                <b-button class="btn-cancel" variant="outline-danger" block @click="hideModal" style="width:50%;">Cancelar</b-button>
                 <button type="submit" class="btn btn-primary"  style="width:50%;">Adicionar</button>
               </div>
             </form>
@@ -291,50 +291,46 @@
 
   },
   compressImage(e) {
-    console.log("Entrou aqui!", e);
-      const width = 250;
-      const height = 250;
-      const fileName = e.target.files[0].name;
-      const reader = new FileReader();
-      reader.readAsDataURL(e.target.files[0]);
-      reader.onload = event => {
+    const width = 250;
+    const height = 250;
+    const fileName = e.target.files[0].name;
+    const reader = new FileReader();
+    reader.readAsDataURL(e.target.files[0]);
+    reader.onload = event => {
+      const img = new Image();
+      img.src = event.target.result;
+      img.onload = () => {
+        const elem = document.createElement('canvas');
+        elem.width = width;
+        elem.height = height;
+        const ctx = elem.getContext('2d');
+        // img.width and img.height will contain the original dimensions
+        ctx.drawImage(img, 0, 0, width, height);
+        ctx.canvas.toBlob((blob) => {
+          const file = new File([blob], fileName, {
+            type: 'image/jpeg',
+            lastModified: Date.now()
+          });
+          this.loading = true;
+          var storageRef = firebase.storage().ref('products/'+ file.name);
+          let uploadTask = storageRef.put(file);
 
+          uploadTask.on('state_changed', (snapshot) =>{
 
-          console.log('Successo');
-          const img = new Image();
-          img.src = event.target.result;
-          img.onload = () => {
-                  const elem = document.createElement('canvas');
-                  elem.width = width;
-                  elem.height = height;
-                  const ctx = elem.getContext('2d');
-                  // img.width and img.height will contain the original dimensions
-                  ctx.drawImage(img, 0, 0, width, height);
-                  ctx.canvas.toBlob((blob) => {
-                      const file = new File([blob], fileName, {
-                          type: 'image/jpeg',
-                          lastModified: Date.now()
-                      });
-                      this.loading = true;
-                      var storageRef = firebase.storage().ref('products/'+ file.name);
-                      let uploadTask = storageRef.put(file);
+          }, (error) => {
 
-                      uploadTask.on('state_changed', (snapshot) =>{
+          }, () =>{
+            uploadTask.snapshot.ref.getDownloadURL().then((downloadUrl) => {
+              this.photo = downloadUrl;
+              console.log('Successo', downloadUrl);
 
-                      }, (error) => {
-
-                      }, () =>{
-                        uploadTask.snapshot.ref.getDownloadURL().then((downloadUrl) => {
-                          this.photo = downloadUrl;
-                          console.log('Successo', downloadUrl);
-
-                        });
-                        this.loading = false
-                      });
-                  }, 'image/jpeg', 1);
-              },
-              reader.onerror = error => console.log(error);
-      };
+            });
+            this.loading = false
+          });
+        }, 'image/jpeg', 1);
+      },
+      reader.onerror = error => console.log(error);
+    };
   },
 
   addProduto (evt) {
@@ -424,9 +420,9 @@
     });
   },
 
-      hideModal() {
-        this.$refs['my-modal'].hide()
-      },
+  hideModal() {
+    this.$refs['my-modal'].hide()
+  },
 }
 }
 
