@@ -295,9 +295,6 @@
       const width = 250;
       const height = 250;
       const fileName = e.target.files[0].name;
-        console.log("Nomae aqui!", fileName);
-
-          console.log("Size aqui!", e.target.files[0].size);
       const reader = new FileReader();
       reader.readAsDataURL(e.target.files[0]);
       reader.onload = event => {
