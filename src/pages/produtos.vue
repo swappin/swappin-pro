@@ -320,7 +320,7 @@
                           type: 'image/jpeg',
                           lastModified: Date.now()
                       });
-
+                      this.loading = true;
                       var storageRef = firebase.storage().ref('products/'+ file.name);
                       let uploadTask = storageRef.put(file);
 
@@ -340,25 +340,6 @@
               },
               reader.onerror = error => console.log(error);
       };
-  },
-  uploadImage(e){
-    this.loading = true
-    let file = e.target.files[0];
-    var storageRef = firebase.storage().ref('products/'+ file.name);
-    let uploadTask = storageRef.put(file);
-
-    uploadTask.on('state_changed', (snapshot) =>{
-
-    }, (error) => {
-
-    }, () =>{
-      uploadTask.snapshot.ref.getDownloadURL().then((downloadUrl) => {
-        this.photo = downloadUrl;
-        console.log('Successo', downloadUrl);
-
-      });
-      this.loading = false
-    });
   },
 
   addProduto (evt) {
