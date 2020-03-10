@@ -23,6 +23,10 @@ import VueApexCharts from 'vue-apexcharts';
 import VueMoment from 'vue-moment'
 import moment from 'moment-timezone'
 
+import ImageUploader from 'vue-image-upload-resize'
+
+Vue.use(ImageUploader);
+
 Vue.use(VueMoment, {
     moment,
 })

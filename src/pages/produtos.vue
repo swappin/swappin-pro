@@ -125,7 +125,7 @@
             <form @submit="addProduto">
               <div class="form-group d-flex flex-column" style="text-align:left">
                 <div class=" mb-4 photo-upload-section d-flex flex-row">
-                  <div><input type="file" @change="uploadImage" :disabled="loading" class="custom-file-input mb-4" id="exampleInputFile" aria-describedby="fileHelp">
+                  <div><input type="file" @change="compressImage" :disabled="loading" class="custom-file-input mb-4" id="exampleInputFile" aria-describedby="fileHelp">
                   <label class="custom-file-label" for="exampleInputFile">
                     <img src="../assets/icons/camera_1.png" class="icon" style="margin-left: 0px !important">
                     <template v-if="loading">
@@ -290,7 +290,57 @@
     }
 
   },
+  compressImage(e) {
+    console.log("Entrou aqui!", e);
+      const width = 250;
+      const height = 250;
+      const fileName = e.target.files[0].name;
+        console.log("Nomae aqui!", fileName);
 
+          console.log("Size aqui!", e.target.files[0].size);
+      const reader = new FileReader();
+      reader.readAsDataURL(e.target.files[0]);
+      reader.onload = event => {
+
+
+          console.log('Successo');
+          const img = new Image();
+          img.src = event.target.result;
+          img.onload = () => {
+
+            console.log('Successo2');
+                  const elem = document.createElement('canvas');
+                  elem.width = width;
+                  elem.height = height;
+                  const ctx = elem.getContext('2d');
+                  // img.width and img.height will contain the original dimensions
+                  ctx.drawImage(img, 0, 0, width, height);
+                  ctx.canvas.toBlob((blob) => {
+                      const file = new File([blob], fileName, {
+                          type: 'image/jpeg',
+                          lastModified: Date.now()
+                      });
+
+                      var storageRef = firebase.storage().ref('products/'+ file.name);
+                      let uploadTask = storageRef.put(file);
+
+                      uploadTask.on('state_changed', (snapshot) =>{
+
+                      }, (error) => {
+
+                      }, () =>{
+                        uploadTask.snapshot.ref.getDownloadURL().then((downloadUrl) => {
+                          this.photo = downloadUrl;
+                          console.log('Successo no Firestorage', downloadUrl);
+
+                        });
+                        this.loading = false
+                      });
+                  }, 'image/jpeg', 1);
+              },
+              reader.onerror = error => console.log(error);
+      };
+  },
   uploadImage(e){
     this.loading = true
     let file = e.target.files[0];
