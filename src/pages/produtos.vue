@@ -307,8 +307,6 @@
           const img = new Image();
           img.src = event.target.result;
           img.onload = () => {
-
-            console.log('Successo2');
                   const elem = document.createElement('canvas');
                   elem.width = width;
                   elem.height = height;
@@ -331,7 +329,7 @@
                       }, () =>{
                         uploadTask.snapshot.ref.getDownloadURL().then((downloadUrl) => {
                           this.photo = downloadUrl;
-                          console.log('Successo no Firestorage', downloadUrl);
+                          console.log('Successo', downloadUrl);
 
                         });
                         this.loading = false
