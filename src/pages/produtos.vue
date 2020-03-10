@@ -206,7 +206,6 @@
         console.log("Error getting documents: ", error);
       });
     },
-
     computed:{
       filtroProduct: function(){
         return this.produtos.filter((produto)=>{
@@ -214,7 +213,7 @@
         })
       }
     },
-    methods: {
+    methods:{
       enable_(produto){
         if(this.enables != true){
           firebase.firestore().collection('stores').doc(this.userName).collection('products').doc(produto.name)
@@ -236,9 +235,9 @@
     }
 
   },
-  compressImage(e) {
-    const width = 250;
-    const height = 250;
+  compressImage(e){
+    const width = 100;
+    const height = 100;
     const fileName = e.target.files[0].name;
     const reader = new FileReader();
     reader.readAsDataURL(e.target.files[0]);
