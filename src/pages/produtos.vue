@@ -304,7 +304,6 @@
         elem.width = width;
         elem.height = height;
         const ctx = elem.getContext('2d');
-        // img.width and img.height will contain the original dimensions
         ctx.drawImage(img, 0, 0, width, height);
         ctx.canvas.toBlob((blob) => {
           const file = new File([blob], fileName, {
@@ -314,16 +313,12 @@
           this.loading = true;
           var storageRef = firebase.storage().ref('products/'+ file.name);
           let uploadTask = storageRef.put(file);
-
           uploadTask.on('state_changed', (snapshot) =>{
-
           }, (error) => {
-
           }, () =>{
             uploadTask.snapshot.ref.getDownloadURL().then((downloadUrl) => {
               this.photo = downloadUrl;
               console.log('Successo', downloadUrl);
-
             });
             this.loading = false
           });
