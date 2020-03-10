@@ -1,10 +1,6 @@
 <template>
-
   <div class="produtos">
     <div class="page-container">
-      <!-- HEADER DESKTOP-->
-
-      <!-- MAIN CONTENT-->
       <div class="main-content">
         <div class="section__content section__content--p30">
           <div class="container-fluid" >
@@ -21,17 +17,9 @@
                     </div>
                   </div>
                 </div>
-
-
-
               </div>
             </div>
             <div class="row">
-
-              <div class="col-lg-12">
-
-
-              </div>
               <div class="col-lg-12">
                 <table class="products-table table">
                   <thead>
@@ -81,43 +69,31 @@
                                 <label> Nome:
                                   <input v-model="produto.name" class="form-control"  type="text" placeholder="Nome" />
                                 </label>
-
                                 <label style=" margin-left:5px;">  Code:
                                   <input v-model="produto.code" class="form-control" type="text" placeholder="Code" style="width:170px"/>
                                 </label>
-
                                 <label style=" margin-left:5px;"> Preço:
                                   <input v-model.number="produto.price" class="form-control" type="number" placeholder="Preço" style="width:170px"/>
                                 </label>
-
                                 <label style=" margin-left:5px;"> Promoção:
                                   <input v-model.number="produto.promotionPrice" class="form-control" type="number" placeholder="Promoção" style="width:170px"/>
                                 </label>
                               </div>
-
-
                               <input type="file" @change="uploadImage"><br><br>
                               <button type="button"  class="btn btn-info" style="width:100%" @click.stop="editProduto(produto)" >Editar</button>
-
                             </form>
                           </template>
                         </b-modal></td>
                         <td>
                           <button type="button" class="btn" style="width:100%" @click.stop="deleteProduto(produto)">
-
                             <img src="../assets/icons/delete.png" class="icon">
                           </button>
                         </td>
-                        <td scope="col"><toggle-button v-model="produto.enable" @change="enable_(produto)"/>
-
-
-                        </td>
+                        <td scope="col"><toggle-button v-model="produto.enable" @change="enable_(produto)"/></td>
                       </tr>
-
                     </tbody>
                   </table>
                 </div>
-
               </div>
             </div>
           </div>
@@ -141,23 +117,17 @@
                     <p class="mb-0">Insira uma foto em boa resolução</p>
                     <h4 class="title-2 swappin-color mb-0 mt-1">Capriche na imagem do seu produto</h4>
                   </div>
-
                 </div>
-
                 <label style=" margin-left:25px;"> Nome do Produto</label>
                 <input v-model="name" class="form-control mb-2"  type="text" placeholder="Digite o nome do produto" style="padding-left: 20px !important;"/>
-
                 <label style=" margin-left:25px;">Código do Produto</label>
                 <input v-model="code" class="form-control mb-2" type="text" placeholder="Digite o código do produto" style="padding-left: 20px !important;"/>
-
                 <label style=" margin-left:25px;"> Preço do Produto
                 </label>
                 <input v-model.number="price" step="0.01" class="form-control mb-2" type="number" placeholder="0" style="padding-left: 20px !important;"/>
-
                 <label style=" margin-left:25px;"> Preço Promocional <i>(opcional)</i>
                 </label>
                 <input v-model.number="promotionPrice" step="0.01" class="form-control mb-2" type="number" style="padding-left: 20px !important;"/>
-
                 <template v-if="promotionPrice">
                   {{isPromotion = true}}
                 </template>
@@ -166,8 +136,6 @@
                 <textarea v-model="description" placeholder="Descrição..." style="border: 1px solid #DCDCDC; border-radius:3px; width:100%; padding:10px"></textarea>
               </div>
               <input-tag v-model="keywords" placeholder="Tags" style="padding:10px"></input-tag><br>
-
-
               <div class="d-flex flex-row">
                 <b-button class="btn-cancel" variant="outline-danger" block @click="hideModal" style="width:50%;">Cancelar</b-button>
                 <button type="submit" class="btn btn-primary"  style="width:50%;">Adicionar</button>
@@ -178,14 +146,10 @@
       </div>
     </div>
   </template>
-
   <script>
   import { produtosCollection } from 'firebase';
   import firebase from 'firebase';
-
-
   export default {
-
     name: 'produtos',
     data () {
 
@@ -214,20 +178,14 @@
 
       }
     },
-
     created () {
-
       firebase.firestore().collection('stores').where('email', '==', email).get().then((querySnapshot) => {
         querySnapshot.forEach((doc) => {
-          console.log(doc.id, ' => ', doc.data())
           this.userName = doc.data().name,
           this.storeScore = doc.data().score,
           this.storePhoto = doc.data().photo,
           this.storeAdress = doc.data().adress,
           this.geopoint= doc.data().geopoint
-
-          console.log(doc.data().position)
-
           firebase.firestore().collection('stores').doc(this.userName).collection('products').onSnapshot((querySnapshot) => {
             this.produtos = [];
             querySnapshot.forEach((doc) => {
@@ -240,19 +198,13 @@
                 description: doc.data().description,
                 enable: doc.data().enable
               });
-              console.log(doc.data())
-
-
             });
-
           });
-
         })
       })
       .catch(function(error) {
         console.log("Error getting documents: ", error);
       });
-
     },
 
     computed:{
@@ -263,29 +215,23 @@
       }
     },
     methods: {
-
-
       enable_(produto){
         if(this.enables != true){
-
           firebase.firestore().collection('stores').doc(this.userName).collection('products').doc(produto.name)
           .update({'enable' : false,
         }).then(() => {
           console.log('Editado com sucesso')
-
         }).catch((error) => {
-          alert("Error removing document: ", error);
+          alert("Erro ao remover documento: ", error);
         });
-
       }else {
-
         firebase.firestore().collection('stores').doc(this.userName).collection('products').doc(produto.name)
         .update({'enable' : true,
       }).then(() => {
         console.log('Editado com sucesso')
 
       }).catch((error) => {
-        alert("Error removing document: ", error);
+        alert("Erro ao remover documento: ", error);
       });
     }
 
@@ -327,10 +273,8 @@
       reader.onerror = error => console.log(error);
     };
   },
-
   addProduto (evt) {
     evt.preventDefault()
-
     firebase.firestore().collection('stores').doc(this.userName).collection('products').doc(this.name).set({
       name: this.name,
       code: this.code,
@@ -361,8 +305,6 @@
     this.description = '';
     this.photo = null;
     this.isPromotion = false;
-
-
     this.$fire({
       title: "Produto cadastrado com sucesso!",
       type: "success",
@@ -376,8 +318,6 @@
     .then((r = boolean) => {
       console.log(r);
       this.$alert("Produto excluido.");
-
-
       firebase.firestore().collection('stores').doc(this.userName).collection('products').doc(produto.name).delete().then(() => {
         console.log('Excluido com sucesso')
       }).catch((error) => {
@@ -390,7 +330,6 @@
     });
 
   },
-
   editProduto(produto) {
     firebase.firestore().collection('stores').doc(this.userName).collection('products').doc(produto.name)
     .update({'name' : produto.name,
@@ -398,9 +337,6 @@
     'price' : produto.price,
     'promotionPrice': produto.promotionPrice,
     photo : this.photo}).then(() => {
-      console.log('Editado com sucesso')
-
-
       this.$fire({
         title: "Produto editado com sucesso!",
         type: "success",
@@ -408,19 +344,16 @@
       }).then(r => {
         console.log(r.value);
       });
-
     }).catch((error) => {
-      alert("Error removing document: ", error);
+      alert("Erro: ", error);
 
     });
   },
-
   hideModal() {
     this.$refs['my-modal'].hide()
   },
 }
 }
-
 </script>
 <style>
 #modal-1 label {
@@ -430,7 +363,6 @@
   font-size: 14px;
   color: #00BFB2;
 }
-
 #modal-1 label i{
   font-style: normal;
   font-size: 12px;
@@ -439,7 +371,6 @@
 .v-switch-core{
   background: linear-gradient(90deg, #00BFB2, #05A9C7) !important;
 }
-
 .photo-upload-section{
   height: 100px !important;
   width: 100% !important;
